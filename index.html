@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Build that App</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">           
+     <style>  
+
+     canvas {
+     border: 3px #CCC solid;
+            }
+
+     </style>
+   </head>
+
+<body>
+
+<div id= "container1">
+    <canvas id="myCanvas" width="350" height="350" style="border:5px solid #008080;">
+    </canvas>
+</div>
+
+<br>
+
+<button id="myMove">Shrink</button>
+<br>
+<br>
+
+<div id = "container2">
+    <canvas id = "triCanvas" width="350" height="350" style="border:5px solid #008080;">
+    </canvas>
+</div>
+
+<script>
+    var mainCanvas = document.querySelector("#myCanvas");
+    var mainContext = mainCanvas.getContext("2d");
+    var canvasWidth = mainCanvas.width;
+    var canvasHeight = mainCanvas.height;
+    var angle = 0;
+    var requestAnimationFrame = window.requestAnimationFrame;
+                            window.mozRequestAnimationFrame;
+                            window.webkitRequestAnimationFrame; 
+                            window.msRequestAnimationFrame;
+//call on the canvas function to make a circle
+    function drawCircle() 
+    {
+    
+    //color for background
+        mainContext.clearRect(0, 0, canvasWidth, canvasHeight);   // I had to mess around a lot to get these ratios right and to center it, I bet there is an easier way
+        mainContext.fillStyle = "#EEEEEE";
+        mainContext.fillRect(0, 0, canvasWidth, canvasHeight);
+    //draw the circle
+        mainContext.beginPath();
+        var radius = 25 + 150 * Math.abs(Math.cos(angle));
+        mainContext.arc(171, 181, radius, 0, Math.PI * 2, false);   
+        mainContext.closePath();
+
+    //color in the Circle
+        mainContext.fillStyle = "#006699";
+        mainContext.fill();
+        angle += Math.PI / 64;
+        requestAnimationFrame(drawCircle);
+    }
+    //end draw circle function
+        drawCircle();
+    //create classes/id/s/vars for drawTriangle now
+        var canvasElement = document.querySelector("#triCanvas");    
+        var c = document.getElementById("triCanvas");
+        var ctx = c.getContext("2d");
+        var c = document.getElementById("triCanvas");
+        var ctx = c.getContext("2d");
+        var context = canvasElement.getContext("2d");
+        var requestAnimationFrame = window.requestAnimationFrame;
+                                    window.mozRequestAnimationFrame; 
+                                    window.webkitRequestAnimationFrame; 
+                                    window.msRequestAnimationFrame;
+
+    function drawTriangle()
+    {
+        // the triangle
+    context.beginPath();
+    context.moveTo(103, 103);
+    context.lineTo(103, 237);
+    context.lineTo(237, 237);
+    context.closePath();
+
+        // the outline
+    context.lineWidth = 10;
+    context.strokeStyle = '#666666';
+    context.stroke();
+
+        // the fill color
+    context.fillStyle = "#FFCC00";
+    context.fill();
+    }
+    //end drawTriangle function
+
+    drawTriangle();
+
+//add the rest of the javascript/script.  This could also be added into a separate .js file and linked to this HTML
+
+    document.getElementById('myMove').addEventListener('click', function()
+    {
+    document.getElementById("container2").style.height = "150px"; document.getElementById("triCanvas").style.width = "185px";
+
+    })
+
+</script>
+</body>
+</html>
